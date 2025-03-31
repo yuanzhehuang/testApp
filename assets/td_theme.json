@@ -1,0 +1,71 @@
+{
+    "CTk": {
+      "fg_color": ["#DAF2E1", "#1a1a1a"],
+      "bg_color": ["#DAF2E1", "#1a1a1a"],
+      "corner_radius": 10
+    },
+    "CTkButton": {
+      "fg_color": ["#006341", "#007c52"],
+      "hover_color": ["#003E29", "#005e3f"],
+      "text_color": ["white", "white"],
+      "text_color_disabled": ["#B0B0B0", "#666666"],
+      "corner_radius": 12,
+      "border_width": 2,
+      "border_color": ["#DAF2E1", "#555555"]
+    },
+    "CTkLabel": {
+      "text_color": ["#212121", "#eeeeee"],
+      "fg_color": ["transparent", "transparent"],
+      "corner_radius": 0
+    },
+    "CTkEntry": {
+      "fg_color": ["#ffffff", "#2e2e2e"],
+      "border_color": ["#DAF2E1", "#555555"],
+      "text_color": ["#212121", "#eeeeee"],
+      "placeholder_text_color": ["#888888", "#aaaaaa"],
+      "corner_radius": 6,
+      "border_width": 1
+    },
+    "CTkFrame": {
+      "top_fg_color": ["#DAF2E1", "#1a1a1a"],
+      "fg_color": ["#DAF2E1", "#1a1a1a"],
+      "corner_radius": 10,
+      "border_width": 2,
+      "border_color": ["#006341", "#2e2e2e"]
+    },
+    "CTkCheckBox": {
+      "fg_color": ["#ffffff", "#2e2e2e"],
+      "hover_color": ["#666666", "#d0d0d0"],
+      "border_color": ["#006341", "#555555"],
+      "text_color": ["#212121", "#eeeeee"],
+      "checkmark_color": ["#006341", "#007c52"],
+      "corner_radius": 1,
+      "border_width": 2,
+      "text_color_disabled": ["#B0B0B0", "#666666"]
+    },
+    "CTkScrollbar": {
+      "button_color": ["#DAF2E1", "#333333"],
+      "button_hover_color": ["#006341", "#007c52"]
+    },
+    "CTkFont": {
+      "family": "Segoe UI",
+      "size": 14,
+      "weight": "normal"
+    },
+    "CTkToplevel": {
+      "fg_color": ["#F5F5F5", "#1a1a1a"],
+      "corner_radius": 10
+    },
+    "CTkRadioButton": {
+      "fg_color": ["#006341", "#007c52"],
+      "hover_color": ["#003E29", "#005e3f"],
+      "border_color": ["#006341", "#2e2e2e"],
+      "corner_radius": 10,
+      "border_width_unchecked": 1,
+      "border_width_checked": 10,
+      "text_color": ["#212121", "#eeeeee"],
+      "checkmark_color": ["#006341", "#007c52"],
+      "text_color_disabled": ["#B0B0B0", "#666666"],
+      "border_width": 2
+    }
+  }

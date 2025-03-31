@@ -1,0 +1,14 @@
+   customtkinter
+   Pillow
+   pyautogui
+   opencv-python
+   pytesseract
+   easyocr
+   spacy
+   # You might need to download a spacy model, e.g., en_core_web_sm
+   # python -m spacy download en_core_web_sm
+   python-docx
+   requests
+   keyboard
+   python-dotenv
+   numpy

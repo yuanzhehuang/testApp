@@ -1,0 +1,35 @@
+   # Python
+   __pycache__/
+   *.py[cod]
+   *$py.class
+   *.egg-info/
+   dist/
+   build/
+   *.spec
+   *.log
+   logs/
+
+   # Environment & Secrets
+   .env
+   venv/
+   env/
+   .venv/
+   secrets/
+   *.env
+
+   # OS / IDE specific
+   .idea/
+   .vscode/
+   *.swp
+   *~
+   .DS_Store
+
+   # Output
+   screenshots/
+   *.docx
+
+   # Miscellaenous
+   Lib/
+   pyvenv.cfg
+   share/
+   .env
