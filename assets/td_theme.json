@@ -13,6 +13,17 @@
       "border_width": 2,
       "border_color": ["#DAF2E1", "#555555"]
     },
+    "CTkSegmentedButton": {
+        "corner_radius": 10,
+        "border_width": 2,
+        "fg_color": ["#F5F5F5", "#333333"],
+        "selected_color": ["#006341", "#007c52"],
+        "selected_hover_color": ["#003E29", "#005e3f"],
+        "unselected_color": ["#DAF2E1", "#1a1a1a"],
+        "unselected_hover_color": ["#C8E0D9", "#2a2a2a"],
+        "text_color": ["#212121", "#eeeeee"],
+        "text_color_disabled": ["#B0B0B0", "#666666"]
+    },
     "CTkLabel": {
       "text_color": ["#212121", "#eeeeee"],
       "fg_color": ["transparent", "transparent"],

@@ -78,9 +78,9 @@ class ScreenshotApp(ctk.CTk):
 
         # Logo (optional)
         try:
-            logo_path = os.path.join(config_manager.get("GENERAL", "asset_directory", fallback="assets"), "cd_logo.png")
+            logo_path = os.path.join(config_manager.get("GENERAL", "asset_directory", fallback="assets"), "TD_Canada_Trust_logo.png")
             if os.path.exists(logo_path):
-                self.logo_image = ctk.CTkImage(Image.open(logo_path), size=(120, 43)) # Adjust size as needed
+                self.logo_image = ctk.CTkImage(Image.open(logo_path), size=(100, 100)) # Adjust size as needed
                 logo_label = ctk.CTkLabel(header_frame, image=self.logo_image, text="")
                 logo_label.grid(row=0, column=0, padx=(10, 20), pady=10)
             else:

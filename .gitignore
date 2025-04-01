@@ -1,35 +1,38 @@
-   # Python
-   __pycache__/
-   *.py[cod]
-   *$py.class
-   *.egg-info/
-   dist/
-   build/
-   *.spec
-   *.log
-   logs/
+# Python
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.spec
+*.log
 
-   # Environment & Secrets
-   .env
-   venv/
-   env/
-   .venv/
-   secrets/
-   *.env
+# Environment & Secrets
+.env
+*.env
+venv/
+env/
+.venv/
+secrets/
+pyvenv.cfg
 
-   # OS / IDE specific
-   .idea/
-   .vscode/
-   *.swp
-   *~
-   .DS_Store
+# Logs
+logs/
+src/logs/
 
-   # Output
-   screenshots/
-   *.docx
+# OS / IDE specific
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
 
-   # Miscellaenous
-   Lib/
-   pyvenv.cfg
-   share/
-   .env
+# Output
+screenshots/
+*.docx
+
+# Miscellaneous
+Lib/
+share/
