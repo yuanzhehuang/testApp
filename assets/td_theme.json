@@ -64,7 +64,7 @@
       "weight": "normal"
     },
     "CTkToplevel": {
-      "fg_color": ["#F5F5F5", "#1a1a1a"],
+      "fg_color": ["#DAF2E1", "#1a1a1a"],
       "corner_radius": 10
     },
     "CTkRadioButton": {

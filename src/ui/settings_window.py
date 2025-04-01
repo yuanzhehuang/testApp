@@ -69,11 +69,14 @@ class SettingsWindow(ctk.CTkToplevel):
     def _setup_ui(self):
         """Creates the UI elements for the settings window."""
         logger.debug("Setting up settings UI.")
-        main_frame = ctk.CTkFrame(self)
-        main_frame.pack(padx=15, pady=15, fill="both", expand=True)
+        main_frame = ctk.CTkFrame(self, fg_color="transparent")
+        main_frame.pack(padx=0, pady=0, fill="both", expand=True)
+        main_frame.grid_rowconfigure(0, weight=1) # Let tabview expand vertically
+        main_frame.grid_rowconfigure(1, weight=0) # Button frame takes fixed height
+        main_frame.grid_columnconfigure(0, weight=1) # Let content expand horizontally
 
         tabview = ctk.CTkTabview(main_frame)
-        tabview.pack(fill="both", expand=True)
+        tabview.grid(row=0, column=0, padx=10, pady=(10, 5), sticky="nsew")
 
         tab_general = tabview.add("General")
         tab_blur = tabview.add("Blurring")
@@ -86,17 +89,15 @@ class SettingsWindow(ctk.CTkToplevel):
         self._setup_integration_tab(tab_integration)
 
         # --- Save/Cancel Buttons ---
-        button_frame = ctk.CTkFrame(main_frame)
-        button_frame.pack(fill="x", pady=(10, 0))
-        # Center buttons in the frame
-        button_frame.grid_columnconfigure(0, weight=1)
-        button_frame.grid_columnconfigure(1, weight=1)
+        button_frame = ctk.CTkFrame(main_frame, fg_color="transparent", border_width=0)
+        button_frame.grid(row=1, column=0, padx=10, pady=(5, 10), sticky="ew")
+        button_frame.grid_columnconfigure((0, 1), weight=1, uniform="save_cancel")
 
         save_button = ctk.CTkButton(button_frame, text="Save & Apply", command=self._save_settings)
-        save_button.grid(row=0, column=0, padx=10, pady=10, sticky="e")
+        save_button.grid(row=0, column=0, padx=(0, 5), pady=5, sticky="e") # Align right within cell? Or ew?
 
         cancel_button = ctk.CTkButton(button_frame, text="Cancel", command=self.destroy, fg_color="gray")
-        cancel_button.grid(row=0, column=1, padx=10, pady=10, sticky="w")
+        cancel_button.grid(row=0, column=1, padx=(5, 0), pady=5, sticky="w")
 
 
     def _create_setting_row(self, parent, label_text, string_var, row_num, tooltip=None):
@@ -134,27 +135,47 @@ class SettingsWindow(ctk.CTkToplevel):
             note.grid(row=4, column=0, columnspan=2, padx=10, pady=(10,5), sticky="w")
 
     def _setup_integration_tab(self, tab):
-            self._create_setting_row(tab, "JIRA Base URL:", self.jira_uri_var, 0, tooltip="Your JIRA instance URL (e.g., https://your-domain.atlassian.net).")
-            self._create_setting_row(tab, "JTMF Base URL:", self.jtmF_uri_var, 1, tooltip="Your JTMF instance URL.")
+        row_num = 0
+        # --- URL Rows ---
+        self._create_setting_row(tab, "JIRA Base URL:", self.jira_uri_var, row_num, ...)
+        tab.grid_rowconfigure(row_num, pad=5) # Add consistent padding between rows in the tab
+        row_num += 1
 
-            # --- Token Management Section ---
-            token_frame = ctk.CTkFrame(tab, fg_color="transparent")
-            token_frame.grid(row=2, column=0, columnspan=2, pady=15, sticky="ew")
+        self._create_setting_row(tab, "JTMF Base URL:", self.jtmF_uri_var, row_num, ...)
+        tab.grid_rowconfigure(row_num, pad=5) # Add consistent padding
+        row_num += 1
 
-            token_label = ctk.CTkLabel(token_frame, text="API Tokens / Secrets:", font=ctk.CTkFont(weight="bold"))
-            token_label.pack(anchor="w", padx=10)
+        # --- Token Management Section ---
+        # Apply border directly via frame kwargs or theme, fg_color transparent usually good
+        token_frame = ctk.CTkFrame(tab, fg_color="transparent", border_width=1) # Example border
+        # Use less external vertical padding (pady=5 or 10) if needed, or rely on internal padding
+        token_frame.grid(row=row_num, column=0, columnspan=2, padx=10, pady=(10, 5), sticky="ew")
+        tab.grid_rowconfigure(row_num, pad=5) # Add consistent padding
+        row_num += 1 # Increment row counter for the tab's grid
 
-            token_note = ctk.CTkLabel(token_frame, text="API Tokens are stored securely in the .env file.\nUse the buttons below to update them if needed.", wraplength=350, justify="left")
-            token_note.pack(anchor="w", padx=10, pady=5)
+        # --- Configure grid INSIDE token_frame ---
+        token_frame.grid_columnconfigure((0, 1), weight=1, uniform="token_buttons") # Distribute space for buttons
+        token_frame_row = 0 # Internal row counter for token_frame
 
-            btn_jira = ctk.CTkButton(token_frame, text="Set JIRA Token", command=lambda: self._update_secret("JIRA_API_TOKEN", "JIRA API Token"))
-            btn_jira.pack(side="left", padx=10, pady=5)
+        token_label = ctk.CTkLabel(token_frame, text="API Tokens / Secrets:", font=ctk.CTkFont(weight="bold"))
+        # Grid the label at the top, spanning columns, minimal internal pady top
+        token_label.grid(row=token_frame_row, column=0, columnspan=2, padx=10, pady=(5, 2), sticky="w")
+        token_frame_row += 1
 
-            btn_jtmf = ctk.CTkButton(token_frame, text="Set JTMF Token", command=lambda: self._update_secret("JTMF_API_TOKEN", "JTMF API Token"))
-            btn_jtmf.pack(side="left", padx=10, pady=5)
+        token_note = ctk.CTkLabel(token_frame, text="API Tokens are stored securely in the .env file.\nUse the buttons below to update them if needed.",
+                                  wraplength=350, justify="left")
+        # Grid the note below the label, spanning columns
+        token_note.grid(row=token_frame_row, column=0, columnspan=2, padx=10, pady=(0, 10), sticky="w")
+        token_frame_row += 1
 
-            # btn_sp = ctk.CTkButton(token_frame, text="Set SharePoint Secret", command=lambda: self._update_secret("SHAREPOINT_CLIENT_SECRET", "SharePoint Client Secret"))
-            # btn_sp.pack(side="left", padx=10, pady=5) # Uncomment if needed
+        # --- Place Buttons using grid inside token_frame ---
+        btn_jira = ctk.CTkButton(token_frame, text="Set JIRA Token", command=lambda: self._update_secret("JIRA_API_TOKEN", "JIRA API Token"))
+        # Add sticky="ew" to make buttons fill their columns
+        btn_jira.grid(row=token_frame_row, column=0, padx=(10, 5), pady=5, sticky="ew")
+
+        btn_jtmf = ctk.CTkButton(token_frame, text="Set JTMF Token", command=lambda: self._update_secret("JTMF_API_TOKEN", "JTMF API Token"))
+        btn_jtmf.grid(row=token_frame_row, column=1, padx=(5, 10), pady=5, sticky="ew")
+        token_frame_row += 1
 
     def _update_secret(self, secret_key, prompt_title):
             """Prompts the user for a secret and saves it using EnvManager."""

@@ -1,5 +1,3 @@
-# src/app.py
-
 import os
 import threading
 import time
@@ -57,8 +55,8 @@ class ScreenshotApp(ctk.CTk):
 
         # --- Setup UI ---
         self.title(f"Screenshot Tool v{self.app_version}")
-        self.geometry("600x550") # Adjusted size
-        self.minsize(450, 400) # Min size
+        self.geometry("800x425") # Adjusted size
+        self.minsize(750, 425) # Min size
         self._setup_ui()
 
         # --- Initialize Hotkeys ---
@@ -141,8 +139,6 @@ class ScreenshotApp(ctk.CTk):
         # self.status_label = ctk.CTkLabel(self, text="Ready", anchor="w")
         # self.status_label.grid(row=3, column=0, padx=10, pady=(5,5), sticky="ew")
 
-
-    # REMOVED: update_history(self) method is no longer needed here. Logic moved to HistoryView.
 
 
     def take_and_store_screenshot(self, auto_mode=False):
